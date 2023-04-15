@@ -5,6 +5,15 @@
                 <v-flex xs12>
                     <h3 class="subject">User CURD</h3>
                 </v-flex>
+                <v-col cols="4" md="4">
+                    <v-text-field v-model="username" :counter="15" label="Username" required></v-text-field>
+                </v-col>
+                <v-col cols="4" md="4">
+                    <v-text-field v-model="age" label="Age" required></v-text-field>
+                </v-col>
+                 <v-col cols="4" md="4">
+                    <v-text-field v-model="city" :counter="15" label="City" required></v-text-field>
+                </v-col>
                 <v-flex column>
                     <v-form ref="form" v-model="model" lazy-validation>
                         <v-text-field v-model="title" :counter="64" label="Title" required></v-text-field>
