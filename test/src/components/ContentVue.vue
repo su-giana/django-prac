@@ -40,7 +40,41 @@
 </template>
 
 <script>
-export default {}
+import axios from "axios";
+let url = "http://localhost:8000";
+
+export default {
+    data: () => {
+        return {
+            data: {
+                username: "",
+                age: "",
+                city: "",
+            },
+        };
+    },
+
+    props: ["propsdata"],
+
+    methods: {
+        sendForm: function(){
+            axios({
+                method: "POST",
+                url: url,
+                data: this.data,
+            })
+            .then((response) => {
+                this.userList = response.data;
+            })
+            .catch((error) => {
+                console.log("Failed to get userList", error.reponse);
+            });
+        },
+        clearForm: function() {
+            (this.data.username=""), (this.data.age=""), (this.data.city= "");
+        },
+    },
+};
 </script>
 
 <style>

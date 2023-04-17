@@ -11,6 +11,7 @@ import axios from "axios";
     </div>
 </template>
 
+<script>
 export default {
     data: () => {
         return {
@@ -43,3 +44,4 @@ export default {
         deleteUserList: function() {}
     }
 };
+</script>
