@@ -3,6 +3,14 @@ import ContentVue from "./components/ContentVue.vue";
 import FooterVue from "./components/FooterVue.vue";
 import axios from "axios";
 
+<template>
+    <div>
+        <HeaderVue></HeaderVue>
+        <ContentVue v-bind:propsdata="userList"></ContentVue>
+        <FooterVue></FooterVue>
+    </div>
+</template>
+
 export default {
     data: () => {
         return {

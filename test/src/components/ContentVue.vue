@@ -26,10 +26,10 @@
 
                 <v-flex class="userList" column>
                     <v-card max-width="600" tile>
-                        <v-list-item>
+                        <v-list-item v-for="(data, index) in propsdata" v-bind:key="index">
                             <v-list-item-content>
-                                <v-list-item-title>Title</v-list-item-title>
-                                <v-list-item-subtitle>content</v-list-item-subtitle>
+                                <v-list-item-title>Name : {{data.username}}</v-list-item-title>
+                                <v-list-item-subtitle>Age : {{data.age}}, Location: {{data.city}}</v-list-item-subtitle>
                             </v-list-item-content>
                         </v-list-item>
                     </v-card>
