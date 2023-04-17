@@ -5,22 +5,21 @@
                 <v-flex xs12>
                     <h3 class="subject">User CURD</h3>
                 </v-flex>
-                <v-col cols="4" md="4">
-                    <v-text-field v-model="username" :counter="15" label="Username" required></v-text-field>
-                </v-col>
-                <v-col cols="4" md="4">
-                    <v-text-field v-model="age" label="Age" required></v-text-field>
-                </v-col>
-                 <v-col cols="4" md="4">
-                    <v-text-field v-model="city" :counter="15" label="City" required></v-text-field>
-                </v-col>
+                
                 <v-flex column>
-                    <v-form ref="form" v-model="model" lazy-validation>
-                        <v-text-field v-model="title" :counter="64" label="Title" required></v-text-field>
-                        <v-text-field v-model="content" :counter="255" label="Content" required></v-text-field>
+                    <v-form ref="form" v-model="userList" lazy-validation>
+                        <v-col cols="4" md="4">
+                    <v-text-field v-model="username" :counter="15" label="Username" required></v-text-field>
+                    </v-col>
+                    <v-col cols="4" md="4">
+                        <v-text-field v-model="age" label="Age" required></v-text-field>
+                    </v-col>
+                    <v-col cols="4" md="4">
+                        <v-text-field v-model="city" :counter="15" label="City" required></v-text-field>
+                    </v-col>    
 
-                        <v-btn @click="create" style="background: green">create</v-btn>
-                        <v-btn @click="clear" style="background: red">clear</v-btn>
+                        <v-btn @click="sendForm" style="background: green">create</v-btn>
+                        <v-btn @click="clearForm" style="background: red">clear</v-btn>
                     </v-form>
                 </v-flex>
 
@@ -41,7 +40,9 @@
 
 <script>
 import axios from "axios";
+
 let url = "http://localhost:8000";
+
 
 export default {
     data: () => {
@@ -50,6 +51,9 @@ export default {
                 username: "",
                 age: "",
                 city: "",
+                xsrfCookieName: 'csrftoken', 
+                xrfHeaderName: 'X-CSRFToken',
+                withCredentials: true,
             },
         };
     },
@@ -65,11 +69,14 @@ export default {
             })
             .then((response) => {
                 this.userList = response.data;
+                // execute get if suceed
+                this.$emit('saved');
             })
             .catch((error) => {
                 console.log("Failed to get userList", error.reponse);
             });
         },
+         
         clearForm: function() {
             (this.data.username=""), (this.data.age=""), (this.data.city= "");
         },

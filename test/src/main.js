@@ -12,4 +12,7 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+
 axios.get(url)
