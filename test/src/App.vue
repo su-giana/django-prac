@@ -1,33 +1,37 @@
-<template>
-  <div>
-    <HeaderVue />
-    <ContentVue />
-    <FooterVue />
-  </div>
-</template>
-
-<script>
 import HeaderVue from "./components/HeaderVue.vue";
 import ContentVue from "./components/ContentVue.vue";
 import FooterVue from "./components/FooterVue.vue";
+import axios from "axios";
 
 export default {
-  components: {
+    data: () => {
+        return {
+            userList: []
+        };
+    },
+
+    components: {
     HeaderVue,
     ContentVue,
     FooterVue,
   },
 
-  data: function(){
-    return {
-      name: "leffept",
-    };
+  mounted(){
+    axios({
+        method: "GET",
+        url: url
+    })
+        .then(respones =>{
+            this.userList = response.data;
+        })
+        .catch(response => {
+            console.log("Failed", response);
+        });
   },
 
-  
+    methods: {
+        getUserList: function() {},
+        updateUserList: function() {},
+        deleteUserList: function() {}
+    }
 };
-</script>
-
-<style>
-
-</style>
