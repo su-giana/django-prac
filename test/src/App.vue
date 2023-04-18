@@ -3,7 +3,7 @@
 <template>
     <div>
         <HeaderVue></HeaderVue>
-        <ContentVue v-bind:propsdata="userList" v-on:saved="getUserList"></ContentVue>
+        <ContentVue v-bind:propsdata="userList" v-on:saved="getUserList" v-on:deleted="getUserList" v-on:patched="getUserList"></ContentVue>
         <!-- v-bind:propsdata="what we want to put" -->
         <!-- get save event through v-on -->
         <FooterVue></FooterVue>
@@ -41,6 +41,9 @@ export default {
         url: url
     })
     .then(response => {
+        for(var index in response.data){
+            response.data[index].is_hidden = false; // add is_hidden = false to data from backend
+        }
         this.userList=response.data;
         console.log("Success", response);
     })
@@ -61,7 +64,22 @@ export default {
   },
 
     methods: {
-        getUserList: function() {},
+        getUserList: function() {
+            axios({
+                method: "GET",
+                url: url,
+            })
+            .then((response) => {
+                for(var index in response.data){
+                    response.data[index].is_hidden = false; // add is_hidden = false to data from backend
+                }
+                this.userList = response.data;
+                console.log("Success", response.data);
+            })
+            .catch((error) => {
+                console.log("Failed to get userList", error.response)
+            });
+        },
         updateUserList: function() {},
         deleteUserList: function() {}
     }
